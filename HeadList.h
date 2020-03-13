@@ -4,45 +4,30 @@
 #include "TList.h"
 
 using namespace std;
+
 template <class T>
-class THeadList : public TList<T> {
+class THeadList :public TList<T> {
+
 protected:
 	TNode<T> *pHead;
 public:
-	THeadList();
-	~THeadList();
+	THeadList() :TList<T>() {
+		pHead = new TNode<T>;
+		pHead->pNext = pHead;
+		pStop = pFirst = pLast = pHead;
+	}
 
-	void insFirst(const T& elem);
-	void DelFirst();
+	~THeadList() {
+		delete pHead;
+	}
+
+	void InsFirst(T val) {
+		TList::InsFirst(val);
+		pHead->pNext = pFirst;
+	}
+
+	void DelFirst() {
+		TList::DelFirst();
+		pHead->pNext = pFirst;
+	}
 };
-
-
-
-
-
-
-
-template <class T>
-THeadList<T>::THeadList() : TList() {
-	pHead = new TLink<T>;
-	pStop = pHead;
-	pHead->pNext = pHead;
-}
-
-template <class T>
-THeadList<T>::~THeadList() {
-	TList<T>::~TList();
-	delete[] pHead;
-}
-
-template <class T>
-void THeadList<T>::insFirst(const T& elem) {
-	TList::insFirst(elem);
-	pHead->pNext = pFirst;
-}
-
-template <class T>
-void THeadList<T>::DelFirst() {
-	TList::DelFirst();
-	pHead->pNext = pFirst;
-}
