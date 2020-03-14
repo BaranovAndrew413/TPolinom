@@ -1,4 +1,4 @@
-#include "..\Project3\TList.h"
+#include "..\TPolinom\TList.h"
 #include"HeadList.h"
 #include "gtest.h"
 

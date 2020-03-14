@@ -1,26 +1,25 @@
 #pragma once
 #include<iostream>
 #include"TPolinom.h"
-
+#include"TList.h"
 #include<math.h>
 
 using namespace std;
 
 int main() {
 	try {
-		TPolinom pol, pol_t;
+		TPolinom p, p1;
 		TMonom m[3];
-		for (int i = 0; i < 3; i++)
-		{
-			m[i].coef = 4*i ;
-			m[i].px = 3*i;
-			m[i].py = 2*i;
-			m[i].pz = i;
-			pol.AddMonom(m[i]);
-		}
-		cout << pol << endl;
-		pol *= m[1];
-		cout << pol << endl;
+		cin >> p ;
+		cout << p;
+		cin >> p1 ;
+		cout << p1 << endl;
+		p += p1;
+		cout << p << endl;
+		cin >> m[1];
+		p.AddMonom(m[1]);
+		cout << p << endl;
+		
 	}
 	catch (char *s) {
 		cout << s;

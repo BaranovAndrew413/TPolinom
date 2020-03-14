@@ -1,6 +1,6 @@
-#include "..\Project3\TPolinom.h"
+#include "..\TPolinom\TPolinom.h"
 
-
+#include"TPolinom.h"
 #include "gtest.h"
 #include <iostream>
 TEST(TMonom, can_create_monom)
@@ -11,36 +11,36 @@ TEST(TMonom, can_create_monom)
 TEST(TMonom, can_ins_monom_with_pos_coef)
 {
 	TMonom m;
-	m.p_x = 0;
-	m.p_y = 0;
-	m.p_z = 0;
+	m.px = 0;
+	m.py = 0;
+	m.pz = 0;
 	ASSERT_NO_THROW(m.coef = 1);
 }
 
 TEST(TMonom, can_ins_monom_with_neg_coef)
 {
 	TMonom m;
-	m.p_x = 0;
-	m.p_y = 0;
-	m.p_z = 0;
+	m.px = 0;
+	m.py = 0;
+	m.pz = 0;
 	ASSERT_NO_THROW(m.coef = -1);
 }
 
 TEST(TMonom, can_ins_monom_with_neg_step)
 {
 	TMonom m;
-	m.p_x = 1;
-	m.p_y = 1;
-	m.p_z = 1;
+	m.px = 1;
+	m.py = 1;
+	m.pz = 1;
 	ASSERT_NO_THROW(m.coef = 5);
 }
 
 TEST(TMonom, can_ins_monom_with_pos_step)
 {
 	TMonom m;
-	m.p_x = -1;
-	m.p_y = -1;
-	m.p_z = -1;
+	m.px = -1;
+	m.py = -1;
+	m.pz = -1;
 	ASSERT_NO_THROW(m.coef = -5);
 }
 
@@ -48,13 +48,13 @@ TEST(TMonom, can_compare_the_monomials)
 {
 	TMonom m1, m2;
 	m1.coef = 5;
-	m1.p_x = 1;
-	m1.p_y = 1;
-	m1.p_z = 1;
+	m1.px = 1;
+	m1.py = 1;
+	m1.pz = 1;
 	m2.coef = 7;
-	m2.p_x = 1;
-	m2.p_y = 1;
-	m2.p_z = 1;
+	m2.px = 1;
+	m2.py = 1;
+	m2.pz = 1;
 	EXPECT_EQ(m1 == m2, 1);
 }
 
@@ -62,13 +62,13 @@ TEST(TMonom, can_ne_monoms)
 {
 	TMonom m1, m2;
 	m1.coef = 5;
-	m1.p_x = 1;
-	m1.p_y = 1;
-	m1.p_z = 1;
+	m1.px = 1;
+	m1.py = 1;
+	m1.pz = 1;
 	m2.coef = 7;
-	m2.p_x = 1;
-	m2.p_y = 2;
-	m2.p_z = 3;
+	m2.px = 1;
+	m2.py = 2;
+	m2.pz = 3;
 	EXPECT_EQ(m1 != m2, 1);
 }
 
@@ -76,13 +76,13 @@ TEST(TMonom, Sravnenie)
 {
 	TMonom m1, m2;
 	m1.coef = 5;
-	m1.p_x = 1;
-	m1.p_y = 1;
-	m1.p_z = 1;
+	m1.px = 1;
+	m1.py = 1;
+	m1.pz = 1;
 	m2.coef = 7;
-	m2.p_x = 1;
-	m2.p_y = 2;
-	m2.p_z = 3;
+	m2.px = 1;
+	m2.py = 2;
+	m2.pz = 3;
 	EXPECT_EQ(m1 <m2, 1);
 	EXPECT_EQ(m1 > m2, 0);
 }
@@ -113,21 +113,21 @@ TEST(TPolinom, can_copy_polynom)
 	ASSERT_NO_THROW(TPolinom p_copy(p));
 }
 
-TEST(TPolynom, can_add_monom)
+TEST(TPolinom, can_add_monom)
 {
 	TPolinom p;
 	TMonom a;
 	a.coef = 1;
-	a.p_x = 1;
-	a.p_y = 1;
-	a.p_z = 1;
+	a.px = 1;
+	a.py = 1;
+	a.pz = 1;
 	ASSERT_NO_THROW(p.AddMonom(a));
 	ASSERT_NO_THROW(p * 5);
 	ASSERT_NO_THROW(p *= 5);
 	ASSERT_NO_THROW(p * a);
 	ASSERT_NO_THROW(p *= a);
 }
-TEST(TPolynom, stop)
+TEST(TPolinom, stop)
 {
 	system("pause");
 }
