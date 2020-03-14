@@ -5,9 +5,7 @@
 struct TMonom
 {
 	double coef;
-	int p_x;
-	int p_y;
-	int p_z;
+	int px, py, pz;
 public:
 	bool operator ==(const TMonom &m);
 	bool operator >(const TMonom &m);
@@ -23,20 +21,20 @@ public:
 		in >> m.coef;
 		cout << endl << "Enter power: ";
 		in >> pxyz;
-		m.p_x = pxyz / 100;
-		m.p_y = pxyz / 10 % 10;
-		m.p_z = pxyz % 10;
+		m.px = pxyz / 100;
+		m.py = pxyz / 10 % 10;
+		m.pz = pxyz % 10;
 		return in;
 	}
 	friend ostream& operator<<(ostream& out, const TMonom &m)
 	{
-		out << m.coef << "(x^" << m.p_x << ")" << "(y^" << m.p_y << ")" << "(z^" << m.p_z << ")";
+		out << m.coef << "(x^" << m.px << ")" << "(y^" << m.py << ")" << "(z^" << m.pz << ")";
 		return out;
 	}
 };
 
 bool TMonom::operator==(const TMonom &m) {
-	if (p_x == m.p_x && p_y == m.p_y&& p_z == m.p_z) {
+	if (px == m.px && py == m.py&& pz == m.pz) {
 		return true;
 	}
 	else
@@ -47,8 +45,8 @@ bool TMonom::operator==(const TMonom &m) {
 
 bool TMonom::operator>(const TMonom &m) {
 	int st_f, st_s;
-	st_f = p_x * 100 + p_y * 10 + p_z;
-	st_s = m.p_x * 100 + m.p_y * 10 + m.p_z;
+	st_f = px * 100 + py * 10 + pz;
+	st_s = m.px * 100 + m.py * 10 + m.pz;
 	if (st_f>st_s)
 	{
 		return true;
@@ -60,8 +58,8 @@ bool TMonom::operator>(const TMonom &m) {
 
 bool TMonom::operator>=(const TMonom &m) {
 	int st_f, st_s;
-	st_f = p_x * 100 + p_y * 10 + p_z;
-	st_s = m.p_x * 100 + m.p_y * 10 + m.p_z;
+	st_f = px * 100 + py * 10 + pz;
+	st_s = m.px * 100 + m.py * 10 + m.pz;
 	if (st_f >= st_s)
 	{
 		return true;
@@ -73,8 +71,8 @@ bool TMonom::operator>=(const TMonom &m) {
 
 bool TMonom::operator<(const TMonom &m) {
 	int st_f, st_s;
-	st_f = p_x * 100 + p_y * 10 + p_z;
-	st_s = m.p_x * 100 + m.p_y * 10 + m.p_z;
+	st_f = px * 100 + py * 10 + pz;
+	st_s = m.px * 100 + m.py * 10 + m.pz;
 	if (st_f < st_s)
 	{
 		return true;
@@ -86,8 +84,8 @@ bool TMonom::operator<(const TMonom &m) {
 
 bool TMonom::operator<=(const TMonom &m) {
 	int st_f, st_s;
-	st_f = p_x * 100 + p_y * 10 + p_z;
-	st_s = m.p_x * 100 + m.p_y * 10 + m.p_z;
+	st_f = px * 100 + py * 10 + pz;
+	st_s = m.px * 100 + m.py * 10 + m.pz;
 	if (st_f <= st_s)
 	{
 		return true;
@@ -114,30 +112,30 @@ class TPolinom :public THeadList<TMonom> {
 public:
 	TPolinom() :THeadList<TMonom>() {
 		pHead->val.coef = 0;
-		pHead->val.p_x = 0;
-		pHead->val.p_y = 0;
-		pHead->val.p_z = -1;
+		pHead->val.px = 0;
+		pHead->val.py = 0;
+		pHead->val.pz = -1;
 	}
 	TPolinom(int monoms[][2], int n) :THeadList<TMonom>(){
 		pHead->val.coef = 0;
-		pHead->val.p_x = 0;
-		pHead->val.p_y = 0;
-		pHead->val.p_z = -1;
+		pHead->val.px = 0;
+		pHead->val.py = 0;
+		pHead->val.pz = -1;
 		TMonom M;
 		for (int i = 0; i < n; i++)
 		{
 			M.coef = monoms[i][0];
-			M.p_z = monoms[i][1] % 10;
-			M.p_x = monoms[i][1] / 100;
-			M.p_y = monoms[i][1] / 10 % 10;
+			M.pz = monoms[i][1] % 10;
+			M.px = monoms[i][1] / 100;
+			M.py = monoms[i][1] / 10 % 10;
 			InsLast(M);
 		}
 	}
 	TPolinom(TPolinom & P) : THeadList<TMonom>() {
 		pHead->val.coef = 0;
-		pHead->val.p_x = 0;
-		pHead->val.p_y = 0;
-		pHead->val.p_z = -1;
+		pHead->val.px = 0;
+		pHead->val.py = 0;
+		pHead->val.pz = -1;
 		TMonom M;
 		for (P.Reset(); !P.IsEnd(); P.GoNext())
 		{
@@ -195,17 +193,18 @@ public:
 		for (Reset(); !IsEnd(); GoNext())
 		{
 			pCurr->val.coef *= M.coef;
-			pCurr->val.p_x += M.p_x;
-			pCurr->val.p_y += M.p_y;
-			pCurr->val.p_z += M.p_z;
+			pCurr->val.px += M.px;
+			pCurr->val.py += M.py;
+			pCurr->val.pz += M.pz;
 		}
+		
 	}
 	TPolinom operator *(TMonom M) {
 		TPolinom res(*this);
 		for (res.Reset(); !res.IsEnd(); res.GoNext()) {
-			res.pCurr->val.p_x += M.p_x;
-			res.pCurr->val.p_y += M.p_y;
-			res.pCurr->val.p_z += M.p_z;
+			res.pCurr->val.px += M.px;
+			res.pCurr->val.py += M.py;
+			res.pCurr->val.pz += M.pz;
 			res.pCurr->val.coef *= M.coef;
 		}
 		return res;

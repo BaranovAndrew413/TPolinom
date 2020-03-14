@@ -12,10 +12,10 @@ int main() {
 		TMonom m[3];
 		for (int i = 0; i < 3; i++)
 		{
-			m[i].coef = 7 * pow(-1, i);
-			m[i].p_x = i / 2;
-			m[i].p_y = 2;
-			m[i].p_z = i;
+			m[i].coef = 4*i ;
+			m[i].px = 3*i;
+			m[i].py = 2*i;
+			m[i].pz = i;
 			pol.AddMonom(m[i]);
 		}
 		cout << pol << endl;
