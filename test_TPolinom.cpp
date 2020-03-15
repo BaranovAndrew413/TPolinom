@@ -127,6 +127,65 @@ TEST(TPolinom, can_add_monom)
 	ASSERT_NO_THROW(p * a);
 	ASSERT_NO_THROW(p *= a);
 }
+TEST(TPolinom, Add_monoms_s_protiv_coef){
+	TPolinom P;
+	TMonom m[3];
+	for (int i = 0; i < 3; i++)
+	{
+		m[i].coef = 4;
+		m[i].px = 3;
+		m[i].py = 2;
+		m[i].pz = 1;
+		P.AddMonom(m[i]);
+	}
+	m[2].coef = -4;
+	P.AddMonom(m[2]);
+	P.Reset();
+	EXPECT_EQ(P.GetCurrEl() == m[1], 1);
+}
+TEST(TPolinom, can_add_protivop_polinoms){
+	TPolinom P;
+	TMonom m;
+	m.coef = 5;
+	m.px = 1;
+	m.py = 1;
+	m.pz = 1;
+	P.AddMonom(m);
+	m.coef = -5;
+	P.AddMonom(m);
+	P.Reset();
+	EXPECT_EQ(P.GetCurrEl().pz == -1, 1);
+}
+TEST(TPolinom, correct_coef){
+	TPolinom P;
+	TMonom m;
+	m.coef = 4;
+	m.px = 1;
+	m.py = 1;
+	m.pz = 1;
+	P.AddMonom(m);
+	m.coef = 4;
+	P.AddMonom(m);
+	P.Reset();
+	EXPECT_EQ(P.GetCurrEl().coef == 8, 1);
+}
+TEST(TPolinom, Can_add_monoms_with_different_coef){
+	TPolinom P;
+	TMonom m[3];
+	for (int i = 0; i < 3; i++)
+	{
+		m[i].coef = 4 * i;
+		m[i].px = 3 * i;
+		m[i].py = 2 * i;
+		m[i].pz = i;
+		P.AddMonom(m[i]);
+	}
+	m[0].coef = -4;
+	P.AddMonom(m[0]);
+	P.Reset();
+	P.GoNext();
+	EXPECT_EQ(P.GetCurrEl() == m[1], 1);
+}
 TEST(TPolinom, stop)
 {
 	system("pause");
