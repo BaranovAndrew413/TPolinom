@@ -1,7 +1,6 @@
-#include "..\TPolinom\TPolinom.h"
-
-#include"TPolinom.h"
 #include "gtest.h"
+#include "..\TPolinom\TPolinom.h"
+#include"TPolinom.h"
 #include <iostream>
 TEST(TMonom, can_create_monom)
 {
@@ -143,19 +142,7 @@ TEST(TPolinom, Add_monoms_s_protiv_coef){
 	P.Reset();
 	EXPECT_EQ(P.GetCurrEl() == m[1], 1);
 }
-TEST(TPolinom, can_add_protivop_polinoms){
-	TPolinom P;
-	TMonom m;
-	m.coef = 5;
-	m.px = 1;
-	m.py = 1;
-	m.pz = 1;
-	P.AddMonom(m);
-	m.coef = -5;
-	P.AddMonom(m);
-	P.Reset();
-	EXPECT_EQ(P.GetCurrEl().pz == -1, 1);
-}
+
 TEST(TPolinom, correct_coef){
 	TPolinom P;
 	TMonom m;

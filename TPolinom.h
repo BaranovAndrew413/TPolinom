@@ -1,4 +1,7 @@
 #pragma once
+#include<iostream>
+
+using namespace std;
 #include "TList.h"
 #include "HeadList.h"
 
@@ -17,9 +20,9 @@ public:
 	friend istream& operator>>(istream& in, TMonom &m)
 	{
 		int pxyz;
-		cout << "Enter coefficient: ";
+		cout << "coefficient: ";
 		in >> m.coef;
-		cout << endl << "Enter power: ";
+		cout << endl << " power: ";
 		in >> pxyz;
 		m.px = pxyz / 100;
 		m.py = pxyz / 10 % 10;

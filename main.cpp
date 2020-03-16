@@ -4,11 +4,9 @@
 #include"TList.h"
 #include<math.h>
 
-using namespace std;
-
 int main() {
 	try {
-		TPolinom p, p1;
+		TPolinom p, p1,p2,p3;
 		TMonom m[3];
 		cin >> p ;
 		cout << p;
@@ -16,9 +14,13 @@ int main() {
 		cout << p1 << endl;
 		p += p1;
 		cout << p << endl;
-		cin >> m[1];
-		p.AddMonom(m[1]);
-		cout << p << endl;
+		cin >> p2;
+		p2 *= -1;
+		cout << p2 << endl;
+	
+		cin >> p3;
+		p3 += p2;
+		cout << p3 << endl;
 		
 	}
 	catch (char *s) {
