@@ -256,7 +256,7 @@ public:
 		TMonom m;
 		in >> m;
 		while (m.coef != 0) {
-			p.InsLast(m);
+			p.AddMonom(m);
 			in >> m;
 		}
 		return in;
